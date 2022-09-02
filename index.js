@@ -25,3 +25,69 @@ newsCatagory();
 
 
 
+
+
+const newsDetails = () => {
+    fetch('https://openapi.programming-hero.com/api/news/category/01')
+        .then(res => res.json())
+        .then(data => displayDetails(data.data))
+
+}
+
+const displayDetails = (details) => {
+    const containerDiv = document.getElementById('contaainer-div');
+    details.forEach(detail => {
+        const currentDiv = document.createElement('div');
+        currentDiv.innerHTML = `
+    <div class="d-flex align-items-center justify-content-center">
+    <div class="card mb-3" style="max-width: 940px, max-height:800px;">
+    <div class="row g-0">
+      <div class="col-md-4" style="width:500px,height:700;">
+        <img  src="${detail.image_url}" class="img-fluid rounded-start" style="height:23rem;" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">${detail.title}</h5>
+          <p class="card-text">${detail.details}</p>
+        </div>
+        
+        <div class="d-flex align-items-center justify-content-around mt-5">
+        
+    <div class=" gap-3 d-flex align-items-center justify-content-center">
+    <div >
+    <img style="width:55px; border-radius:50%"  src="${detail.author.img}" alt="">
+    </div>
+        <div>
+            <p>${detail.author.name ? detail.author.name : 'no writer'}</p>
+            <p>${detail.author.published_date}</p>
+        </div>
+    </div>
+    <div class="gap-2 d-flex align-items-center justify-content-center">
+        <div>
+        <i class="fa-regular fa-eye mb-3"></i>
+        </div>
+        <div>
+            <p>${detail.total_view}</p>
+        </div>
+    </div>
+    
+
+
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+    </div>
+
+`;
+        containerDiv.appendChild(currentDiv);
+    });
+
+
+
+}
+
+
+newsDetails();
