@@ -11,6 +11,7 @@ const displayNews = (catagories) => {
 
     mainDiv.innerHTML = `
         <div>
+            <a type="button"  onclick="newsDetails('06')" class="btn btn-light"><li class="list-group-item">Home</li></a>
             <a type="button"  onclick="newsDetails('01');" class="btn btn-light"><li class="list-group-item">${catagories.news_category[0].category_name}</li></a>
             <a type="button"  onclick="newsDetails('02')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[1].category_name}</li></a>
             <a type="button"  onclick="newsDetails('03')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[2].category_name}</li></a>
