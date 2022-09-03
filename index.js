@@ -44,6 +44,7 @@ const displayDetails = (details) => {
     item.innerText = details.length;
 
     const containerDiv = document.getElementById('contaainer-div');
+    containerDiv.innerHTML = ``;
     details.forEach(detail => {
         const currentDiv = document.createElement('div');
         currentDiv.innerHTML = ``;
