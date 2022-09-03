@@ -7,34 +7,46 @@ const newsCatagory = () => {
 const displayNews = (catagories) => {
     const mainDiv = document.getElementById('news');
     newDiv = document.createElement('div');
+
     mainDiv.innerHTML = `
                         
             <a type="button" class="btn btn-light"><li class="list-group-item">Home</li></a>
-            <a type="button" class="btn btn-light"><li class="list-group-item">${catagories.news_category[0].category_name}</li></a>
-            <a type="button" class="btn btn-light"><li class="list-group-item">${catagories.news_category[1].category_name}</li></a>
-            <a type="button" class="btn btn-light"><li class="list-group-item">${catagories.news_category[2].category_name}</li></a>
-            <a type="button" class="btn btn-light"><li class="list-group-item">${catagories.news_category[3].category_name}</li></a>
-            <a type="button" class="btn btn-light"><li class="list-group-item text-primary bg-primary bg-opacity-10 px-2">${catagories.news_category[4].category_name}</li></a>
-            <a type="button" class="btn btn-light"><li class="list-group-item">${catagories.news_category[5].category_name}</li></a>
-            <a type="button" class="btn btn-light"><li class="list-group-item">${catagories.news_category[6].category_name}</li></a>
-            <a type="button" class="btn btn-light"><li class="list-group-item">${catagories.news_category[7].category_name}</li></a>         
+            <a type="button"  onclick="newsDetails('01');" class="btn btn-light"><li class="list-group-item">${catagories.news_category[0].category_name}</li></a>
+            <a type="button"  onclick="newsDetails('02')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[1].category_name}</li></a>
+            <a type="button"  onclick="newsDetails('03')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[2].category_name}</li></a>
+            <a type="button"  onclick="newsDetails('04')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[3].category_name}</li></a>
+            <a type="button"  onclick="newsDetails('05')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[4].category_name}</li></a>
+            <a type="button"  onclick="newsDetails('06')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[5].category_name}</li></a>
+            <a type="button"  onclick="newsDetails('07')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[6].category_name}</li></a>
+            <a type="button" onclick="newsDetails('08')"  class="btn btn-light"><li class="list-group-item">${catagories.news_category[7].category_name}</li></a>         
         `;
 
 };
 newsCatagory();
 
 
-const newsDetails = () => {
-    fetch('https://openapi.programming-hero.com/api/news/category/01')
+
+
+const newsDetails = (demo) => {
+
+    fetch(`https://openapi.programming-hero.com/api/news/category/${demo}`)
         .then(res => res.json())
         .then(data => displayDetails(data.data))
 
 }
 
 const displayDetails = (details) => {
+    const head = document.getElementById('heading');
+    if (details.length !== 0) {
+        head.classList.add('d-none')
+    }
+    const item = document.getElementById('item');
+    item.innerText = details.length;
+
     const containerDiv = document.getElementById('contaainer-div');
     details.forEach(detail => {
         const currentDiv = document.createElement('div');
+        currentDiv.innerHTML = ``;
         currentDiv.innerHTML = `
     <div class="d-flex align-items-center justify-content-center">
     <div class="card mb-3" style="max-width: 940px, max-height:800px;">
@@ -45,7 +57,7 @@ const displayDetails = (details) => {
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">${detail.title}</h5>
-          <p class="card-text">${detail.details}</p>
+          <p class="card-text">${detail.details.slice(0, 500)}</p>
         </div>
         
         <div class="d-flex align-items-center justify-content-around mt-5">
@@ -91,7 +103,13 @@ const displayDetails = (details) => {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        Title: ${detail.title}
+        </br>
+        Details: ${detail.details}
+        </br
+        Badge:${detail.rating.badge}
+        </br>
+        Number:${detail.rating.number}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -110,6 +128,7 @@ const displayDetails = (details) => {
     </div>
 
 `;
+
         containerDiv.appendChild(currentDiv);
     });
 
