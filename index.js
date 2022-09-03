@@ -5,6 +5,7 @@ const newsCatagory = () => {
 }
 
 const displayNews = (catagories) => {
+
     const mainDiv = document.getElementById('news');
     newDiv = document.createElement('div');
 
@@ -30,12 +31,16 @@ newsCatagory();
 const newsDetails = (demo) => {
 
     fetch(`https://openapi.programming-hero.com/api/news/category/${demo}`)
+
         .then(res => res.json())
         .then(data => displayDetails(data.data))
+
+
 
 }
 
 const displayDetails = (details) => {
+
     const head = document.getElementById('heading');
     if (details.length !== 0) {
         head.classList.add('d-none')
@@ -46,8 +51,11 @@ const displayDetails = (details) => {
     const containerDiv = document.getElementById('contaainer-div');
     containerDiv.innerHTML = ``;
     details.forEach(detail => {
+        toggleSpinner(true);
         const currentDiv = document.createElement('div');
         currentDiv.innerHTML = ``;
+
+
         currentDiv.innerHTML = `
     <div class="d-flex align-items-center justify-content-center">
     <div class="card mb-3" style="max-width: 940px, max-height:800px;">
@@ -118,7 +126,7 @@ const displayDetails = (details) => {
     </div>
   </div>
 </div>
-    </div>
+</div>
 
 
 </div>
@@ -131,11 +139,20 @@ const displayDetails = (details) => {
 `;
 
         containerDiv.appendChild(currentDiv);
+        toggleSpinner(false);
     });
-
-
-
 }
 
 
 newsDetails();
+
+
+const toggleSpinner = isLoading => {
+
+    const loaderSecttion = document.getElementById('loader');
+    if (isLoading) {
+        loaderSecttion.classList.remove('d-none')
+    } else {
+        loaderSecttion.classList.add('d-none');
+    }
+}

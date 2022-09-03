@@ -43,7 +43,7 @@
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Dropdown
+                                Default
                             </button>
                             <ul class="dropdown-menu">
                                 <li><button class="dropdown-item" type="button">Action</button></li>
@@ -61,6 +61,13 @@
         </section>
     </header>
     <main class="container py-3">
+        <section class="py-3 d-none" id="loader">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </section>
 
         <h1 id="heading" class="fs-1 fw-bold text-center py-5 text-warning mb-5">
             No News Found
@@ -70,6 +77,7 @@
 
 
         </div>
+
 
     </main>
     <footer class="bg-secondary bg-opacity-10 p-3">
