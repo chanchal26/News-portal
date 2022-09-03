@@ -10,8 +10,7 @@ const displayNews = (catagories) => {
     newDiv = document.createElement('div');
 
     mainDiv.innerHTML = `
-                        
-            <a type="button" class="btn btn-light"><li class="list-group-item">Home</li></a>
+        <div>
             <a type="button"  onclick="newsDetails('01');" class="btn btn-light"><li class="list-group-item">${catagories.news_category[0].category_name}</li></a>
             <a type="button"  onclick="newsDetails('02')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[1].category_name}</li></a>
             <a type="button"  onclick="newsDetails('03')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[2].category_name}</li></a>
@@ -19,7 +18,9 @@ const displayNews = (catagories) => {
             <a type="button"  onclick="newsDetails('05')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[4].category_name}</li></a>
             <a type="button"  onclick="newsDetails('06')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[5].category_name}</li></a>
             <a type="button"  onclick="newsDetails('07')" class="btn btn-light"><li class="list-group-item">${catagories.news_category[6].category_name}</li></a>
-            <a type="button" onclick="newsDetails('08')"  class="btn btn-light"><li class="list-group-item">${catagories.news_category[7].category_name}</li></a>         
+            <a type="button" onclick="newsDetails('08')"  class="btn btn-light"><li class="list-group-item">${catagories.news_category[7].category_name}</li></a>  
+        </div>
+            
         `;
 
 };
@@ -39,11 +40,23 @@ const newsDetails = (demo) => {
 
 }
 
-const displayDetails = (details) => {
+const toggleSpinner = isLoading => {
 
+    const loaderSecttion = document.getElementById('loader');
+    if (isLoading) {
+        loaderSecttion.classList.remove('d-none')
+    } else {
+        loaderSecttion.classList.add('d-none');
+    }
+}
+
+
+const displayDetails = (details) => {
     const head = document.getElementById('heading');
     if (details.length !== 0) {
         head.classList.add('d-none')
+    } else {
+        head.classList.remove('d-none')
     }
     const item = document.getElementById('item');
     item.innerText = details.length;
@@ -137,22 +150,10 @@ const displayDetails = (details) => {
     </div>
 
 `;
-
-        containerDiv.appendChild(currentDiv);
         toggleSpinner(false);
+        containerDiv.appendChild(currentDiv);
+
     });
 }
 
-
 newsDetails();
-
-
-const toggleSpinner = isLoading => {
-
-    const loaderSecttion = document.getElementById('loader');
-    if (isLoading) {
-        loaderSecttion.classList.remove('d-none')
-    } else {
-        loaderSecttion.classList.add('d-none');
-    }
-}
